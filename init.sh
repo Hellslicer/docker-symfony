@@ -7,9 +7,7 @@ while [[ RET -ne 0 ]]; do
     mysql -e 'exit' > /dev/null 2>&1; RET=$?
 done
 
-DB_NAME=${DB_NAME:-symfony}
-
-mysqladmin -u root create $DB_NAME
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* to 'root'@'%' WITH GRANT OPTION;"
 
 if [ -n "$INIT" ]; then
     /srv/$INIT

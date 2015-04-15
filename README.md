@@ -6,7 +6,6 @@ Forked from ubermuda/symfony.
 ```
 $ docker run -itP \
     -v $PWD:/srv \
-    -e DB_NAME=somedbname \
     -e INIT=bin/reload \
     hellslicer/symfony
 ```
@@ -15,5 +14,4 @@ $ docker run -itP \
 
 Configuration is done through environment variables that you can change with `docker run`' s `-e` switch:
 
-* `DB_NAME`, the database name. Defaults to `symfony`.
 * `INIT`, path to a initialization script (eg: creating db tables, etc). Ignored if empty.
