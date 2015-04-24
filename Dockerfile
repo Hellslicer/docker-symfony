@@ -2,17 +2,15 @@ FROM debian:wheezy
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -y && apt-get install -y wget && wget http://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* && curl -O http://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg
 RUN echo "deb http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list
 RUN echo "deb-src http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list
 RUN echo "deb http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list
 RUN echo "deb-src http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list
 
-RUN apt-get update -y
-RUN apt-get install -y curl git nginx php5-fpm php5-mysqlnd php5-cli mysql-server supervisor
+RUN apt-get update && apt-get install -y git nginx php5-fpm php5-mysqlnd php5-cli mysql-server supervisor php5-dev php-pear && rm -rf /var/lib/apt/lists/*
 
 # Temporary installation of Xdebug
-RUN apt-get install -y php5-dev php-pear
 RUN pecl install xdebug
 RUN echo zend_extension=/usr/lib/php5/20131226/xdebug.so > /etc/php5/fpm/conf.d/xdebug.ini
 RUN echo xdebug.default_enable = 1 >> /etc/php5/fpm/conf.d/xdebug.ini
@@ -50,7 +48,7 @@ RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 ENV COMPOSER_HOME /root/composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN wget https://phar.phpunit.de/phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
+RUN curl -O https://phar.phpunit.de/phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
 
 RUN echo '#!/bin/bash' > /usr/local/bin/dev && echo 'php /srv/app/console --env=dev $@' >> /usr/local/bin/dev && chmod +x /usr/local/bin/dev
 RUN echo '#!/bin/bash' > /usr/local/bin/prod && echo 'php /srv/app/console --env=prod $@' >> /usr/local/bin/prod && chmod +x /usr/local/bin/prod
