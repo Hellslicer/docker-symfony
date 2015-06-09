@@ -8,7 +8,7 @@ RUN echo "deb-src http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.lis
 RUN echo "deb http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list
 RUN echo "deb-src http://packages.dotdeb.org wheezy-php56 all" >> /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y git nginx php5-fpm php5-mysqlnd php5-cli mysql-server supervisor php5-dev php-pear && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git nginx php5-fpm php5-mysqlnd php5-redis php5-cli mysql-server redis-server supervisor php5-dev php-pear && rm -rf /var/lib/apt/lists/*
 
 # Temporary installation of Xdebug
 RUN pecl install xdebug
