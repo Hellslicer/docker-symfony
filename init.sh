@@ -9,6 +9,7 @@ done
 
 mysql -u root -e "GRANT ALL PRIVILEGES ON *.* to 'root'@'%' WITH GRANT OPTION;"
 
-if [ -n "$INIT" ]; then
-    /srv/$INIT
+if [ -f /srv/init.sh ]; then
+    chmod +x /srv/init.sh
+    /srv/init.sh
 fi
