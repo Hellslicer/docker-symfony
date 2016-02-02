@@ -2,7 +2,7 @@ FROM debian:jessie
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y curl git nginx php5-fpm php5-mysqlnd php5-redis redis-server php5-cli php5-dev php-pear mysql-server supervisor \
+RUN apt-get update && apt-get install -y curl git nginx php5-fpm php5-curl php5-mysqlnd php5-redis redis-server php5-cli php5-dev php-pear mysql-server supervisor \
     && apt-get clean && rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 # Temporary installation of Xdebug
