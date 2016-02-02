@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y curl && curl -O https://www.dotdeb.org/dotdeb.gpg && apt-key add dotdeb.gpg && echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list \
     && echo 'deb-src http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list && apt-get update && mkdir -p /run/php && touch /run/php/php7.0-fpm.sock \
-    && apt-get install -y make git nginx php7.0-fpm php7.0-opcache php7.0-json php7.0-mysql redis-server php7.0-cli php7.0-dev mysql-server supervisor \
+    && apt-get install -y make git nginx php7.0-fpm php7.0-opcache php7.0-curl php7.0-json php7.0-mysql redis-server php7.0-cli php7.0-dev mysql-server supervisor \
     && apt-get clean && rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 # Temporary phpredis extension installation
